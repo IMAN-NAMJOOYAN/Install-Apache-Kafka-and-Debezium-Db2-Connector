@@ -15,4 +15,10 @@ https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
 ```
 dnf install java-11-openjdk.x86_64 -y
 ```
-2- 
+2- Download Apache Kafka:
+```
+mkdir /app
+cd /app
+curl -O https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
+```
+
