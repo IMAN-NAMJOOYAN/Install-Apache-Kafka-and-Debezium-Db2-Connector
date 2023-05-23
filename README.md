@@ -125,7 +125,14 @@ schema.history.internal.kafka.bootstrap.servers=localhost:9092
 schema.history.internal.kafka.topic=schema-changes.inventory
 EOF
 
+```
 11- Run Debezium DB2 Connector:
 ```
 /app/kafka/bin/connect-standalone.sh config/connect-standalone.properties connectors/db2.properties
 ```
+
+12- Test connector:
+
+![image](https://github.com/IMAN-NAMJOOYAN/Install-Apache-Kafka-and-Debezium-Db2-Connector/assets/16554389/9b06c808-0616-4166-a64f-58a248f3d30b)
+
+
