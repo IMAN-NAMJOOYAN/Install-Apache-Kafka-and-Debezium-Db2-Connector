@@ -8,6 +8,9 @@ https://repo1.maven.org/maven2/io/debezium/debezium-connector-db2/2.2.1.Final/de
 JDK | 11
 Apache Kafka|3.4.0
 https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
+db2 | docker image db2 11.5.8 (LUW Version)
+
+Note: Before start install steps, install Oracle Linux 8.5 then docker.
 
 **Install Steps:**
 
@@ -86,4 +89,21 @@ EOF
 systemctl enable --now zookeeper
 systemctl enable --now kafka
 ```
-8- 
+8- Create DB2 customized docker image for CDC process:
+You can use Dockerfile for create customized db2 docker image.
+
+```
+docker build . -t ibmcom/db2-cdc-enabled:v1
+```
+
+
+
+
+
+9- Run db2 customized container:
+donload db2
+```
+docker run -itd --name mydb2 --privileged=true -p 50000:50000 -e LICENSE=accept -e DB2INST1_PASSWORD=12345678 -e DBNAME=testdb -v /app/db2:/database ibmcom/db2-cdc-enabled:v1
+```
+
+
