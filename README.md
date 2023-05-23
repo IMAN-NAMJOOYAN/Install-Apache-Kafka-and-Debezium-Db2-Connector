@@ -38,6 +38,8 @@ mkdir /app/kafka/connectors
 ```
 cp /app/kafka/config/connect-standalone.properties{,.bak}
 echo "plugin.path=/app/kafka/plugins,/app/kafka/connectors" >> /app/kafka/config/connect-standalone.properties
+
+vi  ~/.bash_profile #then add "/app/kafka/bin/" to PATH
 ```
 Note: "plugins" path setup for plugins (for example: debezium connector and ...) and "connectors" setup for connectors config files.
 
@@ -49,6 +51,7 @@ mv debezium-connector-db2 debezium
 mv debezium /app/kafka/plugins/
 cd /app/kafka/plugins/debezium/
 curl -O https://repo1.maven.org/maven2/com/ibm/db2/jcc/11.5.8.0/jcc-11.5.8.0.jar
+
 ```
 
 6- Create Zookeeper Systemd Service:
