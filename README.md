@@ -9,7 +9,8 @@ JDK | 11
 Apache Kafka|3.4.0
 https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
 
-Install Steps:
+**Install Steps:**
+
 1- Install JDK 11:
 dnf install java-11-openjdk.x86_64 -y
 
