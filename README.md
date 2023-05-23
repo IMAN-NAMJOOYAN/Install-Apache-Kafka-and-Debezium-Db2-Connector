@@ -138,3 +138,14 @@ EOF
 12- Test connector:
 
 ![image](https://github.com/IMAN-NAMJOOYAN/Install-Apache-Kafka-and-Debezium-Db2-Connector/assets/16554389/9b06c808-0616-4166-a64f-58a248f3d30b)
+
+
+
+#----------------------
+
+Refrences:
+
+[1] https://github.com/debezium/debezium-examples/tree/main/tutorial/debezium-db2-init/db2server
+
+[2] https://debezium.io/documentation/reference/stable/connectors/db2.html
+
