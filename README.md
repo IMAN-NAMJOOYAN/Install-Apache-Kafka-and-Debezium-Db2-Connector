@@ -20,5 +20,70 @@ dnf install java-11-openjdk.x86_64 -y
 mkdir /app
 cd /app
 curl -O https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
+tar xzfv kafka_2.13-3.4.0.tgz
+mv kafka_2.13-3.4.0 kafka
+```
+3- Create plugins and connectors path:
+```
+mkdir /app/kafka/plugins
+mkdir /app/kafka/connectors
+```
+4- Setup Plugin Path:
+```
+cp /app/kafka/config/connect-standalone.properties{,.bak}
+echo "plugin.path=/app/kafka/plugins,/app/kafka/connectors" >> /app/kafka/config/connect-standalone.properties
+```
+Note: "plugins" path setup for plugins (for example: debezium connector and ...) and "connectors" setup for connectors config files.
+
+5- Preapare Debezium DB2 connector as Kafka plugin:
+```
+curl -O https://repo1.maven.org/maven2/io/debezium/debezium-connector-db2/2.2.1.Final/debezium-connector-db2-2.2.1.Final-plugin.tar.gz
+tar xzfv debezium-connector-db2-2.2.1.Final-plugin.tar.gz
+mv debezium-connector-db2 debezium
+mv debezium /app/kafka/plugins/
 ```
 
+6- Create Zookeeper Systemd Service:
+```
+cat <<EOF>/etc/systemd/system/zookeeper.service
+[Unit]
+Description=Apache Zookeeper server
+Documentation=http://zookeeper.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash /app/kafka/bin/zookeeper-server-start.sh /app/kafka/config/zookeeper.properties
+ExecStop=/usr/bin/bash /app/kafka/bin/zookeeper-server-stop.sh
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
+7- Create Kafka Systemd Service:
+```
+cat <<EOF>/etc/systemd/system/kafka.service
+[Unit]
+Description=Apache Kafka Server
+Documentation=http://kafka.apache.org/documentation.html
+Requires=zookeeper.service
+
+[Service]
+Type=simple
+Environment="JAVA_HOME=/usr/lib/jvm/jre-11-openjdk"
+ExecStart=/usr/bin/bash /app/kafka/bin/kafka-server-start.sh /app/kafka/config/server.properties
+ExecStop=/usr/bin/bash /app/kafka/bin/kafka-server-stop.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+```
+systemctl enable --now zookeeper
+systemctl enable --now kafka
+```
+8- 
