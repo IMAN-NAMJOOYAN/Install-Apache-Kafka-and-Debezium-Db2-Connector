@@ -103,5 +103,29 @@ donload db2
 ```
 docker run -itd --name mydb2 --privileged=true -p 50000:50000 -e LICENSE=accept -e DB2INST1_PASSWORD=12345678 -e DBNAME=testdb -v /app/db2:/database ibmcom/db2-cdc-enabled:v1
 ```
+10- Create db2 db2 debezium connector config file:
+```
+cat <<EOF> /app/kafka/connectors/db2.properties
+tasks.max=1
+name=my-db2-connector
+connector.class=io.debezium.connector.db2.Db2Connector
+database.hostname=localhost
+database.port=50000
+database.user=db2inst1
+database.password=12345678
+database.dbname=testdb
+#    database.cdcschema=ASNCDC
+#    topic.prefix=db2server
+topic.prefix=DB2INST1
+#    topic.prefix=DB2INST1
+table.include.list=DB2INST1.*
+#schema.history.internal.kafka.bootstrap.servers=debezium-cluster-kafka-bootstrap:9092
+schema.history.internal.kafka.bootstrap.servers=localhost:9092
+#    schema.history.internal.kafka.topic=schemahistory.DB2INST1
+schema.history.internal.kafka.topic=schema-changes.inventory
+EOF
 
-
+11- Run Debezium DB2 Connector:
+```
+/app/kafka/bin/connect-standalone.sh config/connect-standalone.properties connectors/db2.properties
+```
