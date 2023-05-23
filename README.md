@@ -141,6 +141,19 @@ EOF
 ![image](https://github.com/IMAN-NAMJOOYAN/Install-Apache-Kafka-and-Debezium-Db2-Connector/assets/16554389/9b06c808-0616-4166-a64f-58a248f3d30b)
 
 
+13- Test CDC:
+
+```
+docker exec -it <db2 container name or container id> bash
+su - db2inst1
+db2 "connect to testdb"
+db2 "list tables"
+```
+![image](https://github.com/IMAN-NAMJOOYAN/Install-Apache-Kafka-and-Debezium-Db2-Connector/assets/16554389/f7f66fd1-3b00-4ad5-a758-ac8bbd956b54)
+
+![image](https://github.com/IMAN-NAMJOOYAN/Install-Apache-Kafka-and-Debezium-Db2-Connector/assets/16554389/0a90dd9b-c83a-4b09-9d00-63fe5b62bea6)
+
+
 
 #----------------------
 
