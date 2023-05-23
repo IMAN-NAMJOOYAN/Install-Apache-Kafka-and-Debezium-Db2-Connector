@@ -9,6 +9,8 @@ JDK | 11
 Apache Kafka|3.4.0
 https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
 db2 | docker image db2 11.5.8 (LUW Version)
+jcc|11.5.0.0
+https://repo1.maven.org/maven2/com/ibm/db2/jcc/11.5.8.0/jcc-11.5.8.0.jar
 
 Note: Before start install steps, install Oracle Linux 8.5 then docker.
 
@@ -44,6 +46,8 @@ curl -O https://repo1.maven.org/maven2/io/debezium/debezium-connector-db2/2.2.1.
 tar xzfv debezium-connector-db2-2.2.1.Final-plugin.tar.gz
 mv debezium-connector-db2 debezium
 mv debezium /app/kafka/plugins/
+cd /app/kafka/plugins/debezium/
+curl -O https://repo1.maven.org/maven2/com/ibm/db2/jcc/11.5.8.0/jcc-11.5.8.0.jar
 ```
 
 6- Create Zookeeper Systemd Service:
@@ -134,5 +138,3 @@ EOF
 12- Test connector:
 
 ![image](https://github.com/IMAN-NAMJOOYAN/Install-Apache-Kafka-and-Debezium-Db2-Connector/assets/16554389/9b06c808-0616-4166-a64f-58a248f3d30b)
-
-
