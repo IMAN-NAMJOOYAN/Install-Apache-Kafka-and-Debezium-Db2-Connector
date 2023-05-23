@@ -136,7 +136,7 @@ EOF
 ```
 11- Run Debezium DB2 Connector:
 ```
-/app/kafka/bin/connect-standalone.sh config/connect-standalone.properties connectors/db2.properties
+connect-standalone.sh /app/kafka/config/connect-standalone.properties /app/kafka/connectors/db2.properties
 ```
 
 12- Test connector:
