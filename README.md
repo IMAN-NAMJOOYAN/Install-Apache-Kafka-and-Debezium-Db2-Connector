@@ -93,12 +93,10 @@ systemctl enable --now kafka
 You can use Dockerfile for create customized db2 docker image.
 
 ```
+tar xzfv db2-cdc-enabled.tar.gz
+cd db2-cdc-enabled
 docker build . -t ibmcom/db2-cdc-enabled:v1
 ```
-
-
-
-
 
 9- Run db2 customized container:
 donload db2
